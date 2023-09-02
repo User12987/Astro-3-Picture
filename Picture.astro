@@ -1,0 +1,46 @@
+---
+import { getImage } from 'astro:assets';
+
+type Props = {
+    src: ImageMetadata;
+    alt: string;
+	sizes?: number[];
+	media?: string;
+    loading?: 'lazy' | 'eager';
+	quality?: 'low' | 'medium' | 'high' | number;
+    [key: string]: any;
+};
+
+const { 
+	src, 
+	sizes = [250, 500, 750, 1024],
+	media = '(max-width: 767px) 100vw, 250px', 
+	loading = 'lazy', 
+	quality = 'high',
+	...attrs 
+} = Astro.props as Props;
+
+
+const avif = await Promise.all(sizes.map(size => getImage({ src, format: 'avif', width: size, height: size, quality: quality })));
+const webp = await Promise.all(sizes.map(size => getImage({ src, format: 'webp', width: size, height: size, quality: quality })));
+const jpeg = await Promise.all(sizes.map(size => getImage({ src, format: 'jpeg', width: size, height: size, quality: quality })));
+---
+
+<picture>
+    <source
+        type="image/avif"
+        srcset={avif.map((img, idx) => `${img.src} ${sizes[idx]}w`).join(', ')}
+        sizes={media}
+    />
+    <source
+        type="image/webp"
+        srcset={webp.map((img, idx) => `${img.src} ${sizes[idx]}w`).join(', ')}
+        sizes={media}
+    />
+    <img
+        src={jpeg[0].src}
+        decoding="async"
+		loading={loading}
+        {...attrs}
+    />
+</picture>
