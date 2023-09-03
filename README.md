@@ -9,8 +9,10 @@ Astro v. 3 has no more Picture component. So, I did it and share with you. As th
 1. Copy Picture component to your Astro project.
 2. Create const with image like this in your page:
 
-```js
+```astro
+---
 import img from 'way-to-image'
+---
 ```
 
 Attention! In img const we have img itself (not just path to img).
