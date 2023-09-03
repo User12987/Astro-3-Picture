@@ -32,7 +32,7 @@ Attention! In img const we have img itself (not just path to img).
 
 Done.
 
-Thats will create a `<picture>...</picture>` tag with all needle properties to get [responsive images]([url](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images#art_direction)).
+Thats will create a `<picture>...</picture>` tag with all needle properties to get [responsive images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images#art_direction).
 So, final result will be like this:
 
 ```html
